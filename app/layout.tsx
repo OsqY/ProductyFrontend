@@ -1,36 +1,31 @@
 'use client'
-import React, { useMemo, useState } from 'react';
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+import React from 'react';
 import Head from 'next/head';
-import { darkTheme, lightTheme } from './theme';
-import { Button } from '@mui/material';
-import { DarkMode, LightMode } from '@mui/icons-material';
+import Navbar from './components/NavBar';
+import ThemeContextProvider from './theme-context';
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const [darkMode, setDarkMode] = useState(true)
-
-  const theme = useMemo(() => (darkMode ? darkTheme : lightTheme), [darkMode]);
 
   return (
     <html lang="en">
       <Head>
-        <title>Productivity App</title>
+        <title>Producty</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <link ref="icon" type='image/x-icon' href='../public/Diseño sin título.ico' />
       </Head>
-      <body>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Button variant='contained' onClick={() => setDarkMode(!darkMode)} sx={{ mx: 'auto', mt: 6, display: 'flex', flexDirection: 'row', justifySelf: 'right', alignSelf: 'right' }} startIcon={darkMode ? (<DarkMode />) : (<LightMode />)}>
-            Toggle Theme
-          </Button>
-          {children}
-        </ThemeProvider>
-      </body>
+      <UserProvider>
+        <body>
+          <ThemeContextProvider>
+            <Navbar />
+            {children}
+          </ThemeContextProvider>
+        </body>
+      </UserProvider>
     </html>
   );
 };

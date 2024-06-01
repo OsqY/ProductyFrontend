@@ -1,59 +1,67 @@
 import { createTheme } from '@mui/material/styles';
 
 const darkTheme = createTheme({
-  palette: {
+  typography: {
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+  }, palette: {
     mode: 'dark',
     primary: {
-      main: '#ffadad',
+      main: '#ffc300',
+      contrastText: '#fefcfb',
     },
     secondary: {
-      main: '#FFFFFF',
+      main: '#ffd60a',
     },
     background: {
-      default: '#121212',
-      paper: '#1D1D1D',
+      default: '#000814',
+      paper: '#001d3d',
     },
     text: {
-      primary: '#FFFFFF',
-      secondary: '#B3B3B3',
-    },
-  },
-  typography: {
-    fontFamily: 'Inter, sans-serif',
-    h1: {
-      fontWeight: 700,
-    },
-    h2: {
-      fontWeight: 700,
+      primary: '#ffffff',
     },
   },
 });
 
 const lightTheme = createTheme({
+  typography: {
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+  },
   palette: {
     mode: 'light',
     primary: {
-      main: '#4f33ff ',  // Verde similar a Vercel
+      main: '#056A2F',
+      contrastText: '#fefcfb',
     },
     secondary: {
-      main: '#000000',  // Negro para los elementos secundarios
+      main: '#058C42',
     },
     background: {
-      default: '#F5F5F5',  // Fondo claro
-      paper: '#FFFFFF',    // Fondo de los contenedores claros
+      default: '#ffffff',
     },
     text: {
-      primary: '#000000',  // Texto principal en negro
-      secondary: '#555555',  // Texto secundario en gris oscuro
-    },
-  },
-  typography: {
-    fontFamily: 'Inter, sans-serif',
-    h1: {
-      fontWeight: 700,
-    },
-    h2: {
-      fontWeight: 700,
+      primary: '#020202',
     },
   },
 });

@@ -1,8 +1,13 @@
+'use client'
+
 import React from 'react';
 import { Container, Box, Typography, Button } from '@mui/material';
 import Link from 'next/link';
+import { useTheme } from '@emotion/react';
 
 export default function Home() {
+  const theme = useTheme();
+
   return (
     <Container maxWidth="sm">
       <Box
@@ -13,6 +18,7 @@ export default function Home() {
           justifyContent: 'center',
           height: '100vh',
           textAlign: 'center',
+          backgroundColor: theme.palette.background.default
         }}
       >
         <Typography variant="h2" component="h1" gutterBottom>
@@ -22,8 +28,8 @@ export default function Home() {
           Organize your life here!
         </Typography>
         <Box sx={{ mt: 4 }}>
-          <Link href="/login" passHref>
-            <Button variant="contained" color="primary" sx={{ mr: 2 }}>
+          <Link href="/api/auth/login" passHref>
+            <Button variant="contained" color="primary" sx={{ mr: 2 }} onClick={() => signIn('auth0')}>
               Log In
             </Button>
           </Link>
