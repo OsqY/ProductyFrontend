@@ -1,8 +1,8 @@
 'use client'
 import React from 'react';
 import Head from 'next/head';
-import Navbar from './components/NavBar';
-import ThemeContextProvider from './theme-context';
+import Navbar from '../components/NavBar';
+import ThemeContextProvider from '../theme-context';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 interface LayoutProps {

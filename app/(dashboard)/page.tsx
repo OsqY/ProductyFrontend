@@ -4,9 +4,11 @@ import React from 'react';
 import { Container, Box, Typography, Button } from '@mui/material';
 import Link from 'next/link';
 import { useTheme } from '@emotion/react';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const theme = useTheme();
+  const router = useRouter();
 
   return (
     <Container maxWidth="sm">
@@ -29,7 +31,7 @@ export default function Home() {
         </Typography>
         <Box sx={{ mt: 4 }}>
           <Link href="/api/auth/login" passHref>
-            <Button variant="contained" color="primary" sx={{ mr: 2 }} onClick={() => signIn('auth0')}>
+            <Button variant="contained" color="primary" sx={{ mr: 2 }} onClick={() => router.push('/api/auth/login')}>
               Log In
             </Button>
           </Link>

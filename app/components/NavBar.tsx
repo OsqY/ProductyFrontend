@@ -9,6 +9,7 @@ import Image from "next/image"
 import Logo from "../../public/5fbWaH01.svg"
 
 const Navbar = () => {
+
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
   const pages = ['About', 'Contact'];
 
