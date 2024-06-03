@@ -1,5 +1,5 @@
 import { getSession } from "next-auth/react";
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 
 const Dashboard = ({ user }) => {
   const router = useRouter();
