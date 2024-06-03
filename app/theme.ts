@@ -180,8 +180,9 @@ const getDesignTokens = (mode) => ({
 });
 
 export default function getLPTheme(mode) {
+  const designTokens = getDesignTokens(mode);
   return {
-    ...getDesignTokens(mode),
+    ...designTokens,
     components: {
       MuiAccordion: {
         defaultProps: {

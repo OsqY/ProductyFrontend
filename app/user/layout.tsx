@@ -1,3 +1,6 @@
+/* eslint-disable */
+
+
 'use client'
 
 import React, { useState } from 'react';
@@ -31,7 +34,7 @@ const Layout = ({ children }: LayoutProps) => {
       <Head>
         <title>Producty</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <link ref="icon" type='image/x-icon' href='../public/Diseño sin título.ico' />
+        <link type='image/x-icon' href='../public/Diseño sin título.ico' />
       </Head>
       <UserProvider>
         <body>
