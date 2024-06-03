@@ -1,19 +1,13 @@
 'use client'
 
-import { useUser } from "@auth0/nextjs-auth0/client"
-import { Box, Container, Typography, alpha } from "@mui/material";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+import { alpha } from '@mui/material';
 
-const UserPage = () => {
-  const { user, isLoading } = useUser();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!isLoading && !user) {
-      router.push('/api/auth/login');
-    }
-  }, [user, isLoading, router]);
+const Hero = () => {
 
   return (
     <Box
@@ -37,37 +31,38 @@ const UserPage = () => {
           pb: { xs: 8, sm: 12 },
         }}
       >
-        <Typography variant="h4" component="h3" marginTop={0}>
-          {isLoading && (
-            <div>Loading...</div>
-          ) ||
-            !user && (
-              <div>Redirecting...</div>
-            )}
-        </Typography>
-        <Typography
-          variant="h1"
-          sx={{
-            display: 'flex',
-            flexDirection: { xs: 'column', md: 'row' },
-            alignSelf: 'center',
-            textAlign: 'center',
-            fontSize: 'clamp(3.5rem, 10vw, 4rem)',
-          }}
-        >
-          Welcome &nbsp;
+        <Stack spacing={2} useFlexGap sx={{ width: { xs: '100%', sm: '70%' } }}>
           <Typography
-            component="span"
             variant="h1"
             sx={{
-              fontSize: 'clamp(3rem, 10vw, 4rem)',
-              color: (theme) =>
-                theme.palette.mode === 'light' ? 'primary.main' : 'primary.light',
+              display: 'flex',
+              flexDirection: { xs: 'column', md: 'row' },
+              alignSelf: 'center',
+              textAlign: 'center',
+              fontSize: 'clamp(3.5rem, 10vw, 4rem)',
             }}
           >
-            {user?.name}
+            Building a productive&nbsp;
+            <Typography
+              component="span"
+              variant="h1"
+              sx={{
+                fontSize: 'clamp(3rem, 10vw, 4rem)',
+                color: (theme) =>
+                  theme.palette.mode === 'light' ? 'primary.main' : 'primary.light',
+              }}
+            >
+              life with Producty
+            </Typography>
           </Typography>
-        </Typography>
+          <Typography
+            textAlign="center"
+            color="text.secondary"
+            sx={{ alignSelf: 'center', width: { sm: '100%', md: '80%' } }}
+          >
+            Explore our productivity app to keep you on track to achieve your goals.
+          </Typography>
+        </Stack>
         <Box
           id="image"
           sx={(theme) => ({
@@ -93,9 +88,8 @@ const UserPage = () => {
           })}
         />
       </Container>
-    </Box >
-  )
+    </Box>
+  );
 }
 
-export default UserPage;
-
+export default Hero;

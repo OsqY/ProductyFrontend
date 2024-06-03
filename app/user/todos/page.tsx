@@ -1,23 +1,14 @@
-'use client'
+'use client';
 
-import { useUser } from "@auth0/nextjs-auth0/client"
+import { useUser } from "@auth0/nextjs-auth0/client";
 import { Box, Container, Typography, alpha } from "@mui/material";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
-const UserPage = () => {
-  const { user, isLoading } = useUser();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!isLoading && !user) {
-      router.push('/api/auth/login');
-    }
-  }, [user, isLoading, router]);
+const TodosPage = () => {
+  const { user } = useUser()
 
   return (
     <Box
-      id="hero"
+      id="todos"
       sx={(theme) => ({
         width: '100%',
         backgroundImage:
@@ -37,14 +28,14 @@ const UserPage = () => {
           pb: { xs: 8, sm: 12 },
         }}
       >
-        <Typography variant="h4" component="h3" marginTop={0}>
-          {isLoading && (
-            <div>Loading...</div>
-          ) ||
-            !user && (
-              <div>Redirecting...</div>
-            )}
-        </Typography>
+        {/* <Typography variant="h4" component="h3" marginTop={0}> */}
+        {/*   {isLoading && ( */}
+        {/*     <div>Loading...</div> */}
+        {/*   ) || */}
+        {/*     !user && ( */}
+        {/*       <div>Redirecting...</div> */}
+        {/*     )} */}
+        {/* </Typography> */}
         <Typography
           variant="h1"
           sx={{
@@ -55,7 +46,7 @@ const UserPage = () => {
             fontSize: 'clamp(3.5rem, 10vw, 4rem)',
           }}
         >
-          Welcome &nbsp;
+          Todos from &nbsp;
           <Typography
             component="span"
             variant="h1"
@@ -97,5 +88,4 @@ const UserPage = () => {
   )
 }
 
-export default UserPage;
-
+export default TodosPage;

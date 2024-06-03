@@ -1,82 +1,237 @@
 'use client'
 
-import { ThemeContext } from "../theme-context"
-import React, { useContext, useState } from "react"
-import { AppBar, Box, Button, Container, IconButton, Menu, MenuItem, SvgIcon, Switch, Toolbar, Typography } from '@mui/material'
-import MenuIcon from '@mui/icons-material/Menu'
-import Link from "next/link"
-import Image from "next/image"
-import Logo from "../../public/5fbWaH01.svg"
+import * as React from 'react';
+import { PaletteMode, useTheme } from '@mui/material';
+import Box from '@mui/material/Box';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
+import MenuItem from '@mui/material/MenuItem';
+import Drawer from '@mui/material/Drawer';
+import MenuIcon from '@mui/icons-material/Menu';
+import ToggleColorMode from './ToggleColorMode';
 
-const Navbar = () => {
+const logoStyle = {
+  width: '80px',
+  height: 'auto',
+  cursor: 'pointer',
+};
 
-  const { darkMode, toggleDarkMode } = useContext(ThemeContext);
-  const pages = ['About', 'Contact'];
+interface AppAppBarProps {
+  mode: PaletteMode;
+  toggleColorMode: () => void;
+}
 
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+export const Navbar = ({ mode, toggleColorMode }: AppAppBarProps) => {
+  const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  }
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setOpen(newOpen);
+  };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  }
-
+  const scrollToSection = (sectionId: string) => {
+    const sectionElement = document.getElementById(sectionId);
+    const offset = 128;
+    if (sectionElement) {
+      const targetScroll = sectionElement.offsetTop - offset;
+      sectionElement.scrollIntoView({ behavior: 'smooth' });
+      window.scrollTo({
+        top: targetScroll,
+        behavior: 'smooth',
+      });
+      setOpen(false);
+    }
+  };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', justifyContent: 'center', width: 100, height: 100 }}>
-            <SvgIcon component="div" sx={{ width: '100%', height: '100%' }}>
-              <Image src={Logo} alt="Producty" layout="fill" objectFit="contain" />
-            </SvgIcon>
-          </Box>
-
-          <Link href="/" passHref style={{ textDecoration: 'none', color: 'inherit' }}>
-            <Typography variant="h6" sx={{ display: { xs: 'none', md: 'flex' }, fontWeight: 700, ml: 0, mr: 2, letterSpacing: '.2rem' }}>
-              Producty
-            </Typography>
-          </Link>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton size="large" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleOpenNavMenu}
-              color="inherit">
-              <MenuIcon />
-            </IconButton>
-            <Menu id="menu-appbar" anchorEl={anchorElNav} anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'left' }} open={Boolean(anchorElNav)} onClose={handleCloseNavMenu} sx={{ display: { xs: 'block', md: 'none' }, }}>
-              {pages.map((page) => (
-                <Link href={'/' + page} key={page} style={{ textDecoration: 'none' }} passHref>
-                  <MenuItem onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center" style={{ color: 'inherit' }}>{page}</Typography>
-                  </MenuItem>
-                </Link>
-              ))}
-            </Menu>
-          </Box>
-
-          <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 2, alignItems: 'center', justifyContent: 'center', width: 100, height: 100 }}>
-            <SvgIcon component="div" sx={{ width: '100%', height: '100%' }}>
-              <Image src={Logo} alt="Producty" layout="fill" objectFit="contain" />
-            </SvgIcon>
-          </Box>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>   {pages.map((page) => (
-            <Button
-              key={page}
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: 'white', display: 'block', mx: 1 }}
+    <div>
+      <AppBar
+        position="fixed"
+        sx={{
+          boxShadow: 0,
+          bgcolor: 'transparent',
+          backgroundImage: 'none',
+          mt: 2,
+        }}
+      >
+        <Container maxWidth="lg">
+          <Toolbar
+            variant="regular"
+            sx={(theme) => ({
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexShrink: 0,
+              borderRadius: '999px',
+              bgcolor:
+                theme.palette.mode === 'light'
+                  ? 'rgba(255, 255, 255, 0.4)'
+                  : 'rgba(0, 0, 0, 0.4)',
+              backdropFilter: 'blur(24px)',
+              maxHeight: 40,
+              border: '1px solid',
+              borderColor: 'divider',
+              boxShadow:
+                theme.palette.mode === 'light'
+                  ? `0 0 1px rgba(85, 166, 246, 0.1), 1px 1.5px 2px -1px rgba(85, 166, 246, 0.15), 4px 4px 12px -2.5px rgba(85, 166, 246, 0.15)`
+                  : '0 0 1px rgba(2, 31, 59, 0.7), 1px 1.5px 2px -1px rgba(2, 31, 59, 0.65), 4px 4px 12px -2.5px rgba(2, 31, 59, 0.65)',
+            })}
+          >
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: 'flex',
+                alignItems: 'center',
+                ml: '-18px',
+                px: 0,
+              }}
             >
-              {page}
-            </Button>
-          ))}
-          </Box>
-          <Switch checked={darkMode} onChange={toggleDarkMode} />
-        </Toolbar>
-      </Container>
-    </AppBar >
-  )
+              {theme.palette.mode === 'light' ?
+                (
+                  <img
+
+                    src={
+                      'https://svgshare.com/i/16jm.svg'
+                    }
+                    style={logoStyle}
+                    alt="logo of producty"
+                  />
+
+                ) :
+                <img
+
+                  src={
+                    'https://i.postimg.cc/xjgmkjzR/output.png'
+                  }
+                  style={logoStyle}
+                  alt="logo of producty"
+                />
+              }
+              <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                <MenuItem
+                  sx={{ py: '6px', px: '12px' }}
+                >
+                  <Typography variant="body2" color="text.primary">
+                    Features
+                  </Typography>
+                </MenuItem>
+                <MenuItem
+                  sx={{ py: '6px', px: '12px' }}
+                >
+                  <Typography variant="body2" color="text.primary">
+                    Testimonials
+                  </Typography>
+                </MenuItem>
+                <MenuItem
+                  sx={{ py: '6px', px: '12px' }}
+                >
+                  <Typography variant="body2" color="text.primary">
+                    Highlights
+                  </Typography>
+                </MenuItem>
+                <MenuItem
+                  sx={{ py: '6px', px: '12px' }}
+                >
+                  <Typography variant="body2" color="text.primary">
+                    Pricing
+                  </Typography>
+                </MenuItem>
+                <MenuItem
+                  onClick={() => scrollToSection('faq')}
+                  sx={{ py: '6px', px: '12px' }}
+                >
+                  <Typography variant="body2" color="text.primary">
+                    FAQ
+                  </Typography>
+                </MenuItem>
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                display: { xs: 'none', md: 'flex' },
+                gap: 0.5,
+                alignItems: 'center',
+              }}
+            >
+              <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
+              <Button
+                color="primary"
+                variant="text"
+                size="small"
+                component="a"
+                href="/api/auth/login"
+                target="_blank"
+              >
+                Sign in
+              </Button>
+            </Box>
+            <Box sx={{ display: { sm: '', md: 'none' } }}>
+              <Button
+                variant="text"
+                color="primary"
+                aria-label="menu"
+                onClick={toggleDrawer(true)}
+                sx={{ minWidth: '30px', p: '4px' }}
+              >
+                <MenuIcon />
+              </Button>
+              <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
+                <Box
+                  sx={{
+                    minWidth: '60dvw',
+                    p: 2,
+                    backgroundColor: 'background.paper',
+                    flexGrow: 1,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'end',
+                      flexGrow: 1,
+                    }}
+                  >
+                    <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
+                  </Box>
+                  <MenuItem >
+                    Features
+                  </MenuItem>
+                  <MenuItem >
+                    Testimonials
+                  </MenuItem>
+                  <MenuItem >
+                    Highlights
+                  </MenuItem>
+                  <MenuItem >
+                    Pricing
+                  </MenuItem>
+                  <MenuItem >FAQ</MenuItem>
+                  <Divider />
+                  <MenuItem>
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      component="a"
+                      href="/api/auth/login"
+                      target="_blank"
+                      sx={{ width: '100%' }}
+                    >
+                      Sign in
+                    </Button>
+                  </MenuItem>
+                </Box>
+              </Drawer>
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+    </div>
+  );
 }
 
 export default Navbar;

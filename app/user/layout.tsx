@@ -1,36 +1,51 @@
 'use client'
 
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
-import ThemeContextProvider from '../theme-context';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
-import UserSideBar from '../components/UserSideBar';
-import Box from 'next-auth/providers/box';
+import { ThemeProvider } from '@emotion/react';
+import getLPTheme from '../theme';
+import UserNavbar from '../components/UserNavBar';
+import { CssBaseline, PaletteMode, createTheme } from '@mui/material';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const [mode, setMode] = useState<PaletteMode>('light');
+  const [showCustomTheme, setShowCustomTheme] = useState(true)
+  const LPtheme = createTheme(getLPTheme(mode))
+  const defaultTheme = createTheme({ palette: { mode } })
+
+  const toggleColorMode = () => {
+    setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
+
+  const toggleCustomTheme = () => {
+    setShowCustomTheme((prev) => !prev);
+  };
 
   return (
-      <html lang="en">
-        <Head>
-          <title>Producty</title>
-          <meta name="viewport" content="initial-scale=1, width=device-width" />
-          <link ref="icon" type='image/x-icon' href='../public/Diseño sin título.ico' />
-        </Head>
-        <UserProvider>
-          <body>
-            <ThemeContextProvider>
-              <UserSideBar />
-              {children}
-            </ThemeContextProvider>
-          </body>
-        </UserProvider>
-        </html>
+    <html lang="en">
+      <Head>
+        <title>Producty</title>
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <link ref="icon" type='image/x-icon' href='../public/Diseño sin título.ico' />
+      </Head>
+      <UserProvider>
+        <body>
+          <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme} >
+            <CssBaseline />
+            <UserNavbar mode={mode} toggleColorMode={toggleColorMode} />
+            {children}
+          </ThemeProvider>
+        </body>
+      </UserProvider>
+    </html >
   );
-}
+};
 
 export default Layout;
+
 
