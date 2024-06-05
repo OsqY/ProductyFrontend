@@ -1,10 +1,8 @@
 'use client';
 
-import { useUser } from "@auth0/nextjs-auth0/client";
 import { Box, Container, Typography, alpha } from "@mui/material";
 
 const JournalPage = () => {
-  const { user } = useUser()
 
   return (
     <Box
@@ -46,18 +44,7 @@ const JournalPage = () => {
             fontSize: 'clamp(3.5rem, 10vw, 4rem)',
           }}
         >
-          Journal from &nbsp;
-          <Typography
-            component="span"
-            variant="h1"
-            sx={{
-              fontSize: 'clamp(3rem, 10vw, 4rem)',
-              color: (theme) =>
-                theme.palette.mode === 'light' ? 'primary.main' : 'primary.light',
-            }}
-          >
-            {user?.name}
-          </Typography>
+          Journal
         </Typography>
         <Box
           id="image"
@@ -88,4 +75,4 @@ const JournalPage = () => {
   )
 }
 
-export default ProfilePage;
+export default JournalPage;

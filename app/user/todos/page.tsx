@@ -1,10 +1,10 @@
 'use client';
 
-import { useUser } from "@auth0/nextjs-auth0/client";
+import TodosTable from "@/app/components/TodosTable";
 import { Box, Container, Typography, alpha } from "@mui/material";
+import Link from "next/link";
 
 const TodosPage = () => {
-  const { user } = useUser()
 
   return (
     <Box
@@ -46,43 +46,63 @@ const TodosPage = () => {
             fontSize: 'clamp(3.5rem, 10vw, 4rem)',
           }}
         >
-          Todos from &nbsp;
-          <Typography
-            component="span"
-            variant="h1"
-            sx={{
-              fontSize: 'clamp(3rem, 10vw, 4rem)',
-              color: (theme) =>
-                theme.palette.mode === 'light' ? 'primary.main' : 'primary.light',
-            }}
-          >
-            {user?.name}
-          </Typography>
+          Todos
         </Typography>
-        <Box
-          id="image"
-          sx={(theme) => ({
-            mt: { xs: 8, sm: 10 },
-            alignSelf: 'center',
-            height: { xs: 200, sm: 700 },
-            width: '100%',
-            backgroundImage:
-              theme.palette.mode === 'light'
-                ? 'url("/static/images/templates/templates-images/hero-light.png")'
-                : 'url("/static/images/templates/templates-images/hero-dark.png")',
-            backgroundSize: 'cover',
-            borderRadius: '10px',
-            outline: '1px solid',
-            outlineColor:
-              theme.palette.mode === 'light'
-                ? alpha('#BFCCD9', 0.5)
-                : alpha('#9CCCFC', 0.1),
-            boxShadow:
-              theme.palette.mode === 'light'
-                ? `0 0 12px 8px ${alpha('#9CCCFC', 0.2)}`
-                : `0 0 24px 12px ${alpha('#033363', 0.2)}`,
-          })}
-        />
+
+        <Link href="/user/todos/new" style={{ textDecoration: 'none' }}>
+
+          <Box
+            id="image"
+            sx={(theme) => ({
+              mt: { xs: 8, sm: 10 },
+              alignSelf: 'center',
+              height: { xs: 250 },
+              width: '100%',
+              backgroundImage:
+                theme.palette.mode === 'light'
+                  ? 'url("/static/images/templates/templates-images/hero-light.png")'
+                  : 'url("/static/images/templates/templates-images/hero-dark.png")',
+              backgroundSize: 'cover',
+              borderRadius: '10px',
+              outline: '1px solid',
+              outlineColor:
+                theme.palette.mode === 'light'
+                  ? alpha('#BFCCD9', 0.5)
+                  : alpha('#9CCCFC', 0.1),
+              boxShadow:
+                theme.palette.mode === 'light'
+                  ? `0 0 12px 8px ${alpha('#9CCCFC', 0.2)}`
+                  : `0 0 24px 12px ${alpha('#033363', 0.2)}`,
+              transition: '500ms',
+              paddingX: 10,
+              paddingY: 5,
+              "&:hover": {
+                boxShadow: theme.palette.mode === 'light'
+                  ? `0 0 34px 38px ${alpha('#9CCCFC', 0.2)}`
+                  : `0 0 44px 32px ${alpha('#033363', 0.2)}`,
+
+              },
+            })}
+          >
+            <Typography
+              component="h3"
+              variant="h4"
+              sx={{
+                display: 'flex',
+                flexDirection: { xs: 'column', md: 'row' },
+                alignSelf: 'center',
+                textAlign: 'center',
+                fontSize: 'clamp(2.5rem, 3vw, 4rem)',
+                fontWeight: 'bold'
+              }}
+            >
+              Make a new Todo!
+            </Typography>
+          </Box>
+
+        </Link>
+
+        <TodosTable />
       </Container>
     </Box >
   )

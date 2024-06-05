@@ -10,6 +10,8 @@ import { ThemeProvider } from '@emotion/react';
 import getLPTheme from '../theme';
 import UserNavbar from '../components/UserNavBar';
 import { CssBaseline, PaletteMode, createTheme } from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -37,13 +39,16 @@ const Layout = ({ children }: LayoutProps) => {
         <link type='image/x-icon' href='../public/Diseño sin título.ico' />
       </Head>
       <UserProvider>
-        <body>
-          <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme} >
-            <CssBaseline />
-            <UserNavbar mode={mode} toggleColorMode={toggleColorMode} />
-            {children}
-          </ThemeProvider>
-        </body>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <body>
+            <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme} >
+              <CssBaseline />
+              <UserNavbar mode={mode} toggleColorMode={toggleColorMode} />
+              {children}
+            </ThemeProvider>
+          </body>
+        </LocalizationProvider>
+
       </UserProvider>
     </html >
   );

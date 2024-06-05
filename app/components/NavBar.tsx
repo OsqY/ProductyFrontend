@@ -13,6 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import ToggleColorMode from './ToggleColorMode';
+import Link from 'next/link';
 
 const logoStyle = {
   width: '80px',
@@ -92,24 +93,28 @@ export const Navbar = ({ mode, toggleColorMode }: AppAppBarProps) => {
             >
               {theme.palette.mode === 'light' ?
                 (
+                  <Link href='/' passHref>
+                    <img
+
+                      src={
+                        'https://svgshare.com/i/16jm.svg'
+                      }
+                      style={logoStyle}
+                      alt="logo of producty"
+                    />
+                  </Link>
+
+                ) :
+                <Link href='/' passHref>
                   <img
 
                     src={
-                      'https://svgshare.com/i/16jm.svg'
+                      'https://i.postimg.cc/xjgmkjzR/output.png'
                     }
                     style={logoStyle}
                     alt="logo of producty"
                   />
-
-                ) :
-                <img
-
-                  src={
-                    'https://i.postimg.cc/xjgmkjzR/output.png'
-                  }
-                  style={logoStyle}
-                  alt="logo of producty"
-                />
+                </Link>
               }
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                 <MenuItem
