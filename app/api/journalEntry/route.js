@@ -1,20 +1,24 @@
-import { getAccessToken } from '@auth0/nextjs-auth0';
+import { getAccessToken } from "@auth0/nextjs-auth0";
 
 export async function GET() {
   try {
+
     const { accessToken } = await getAccessToken();
 
     if (!accessToken) {
       return new Response(JSON.stringify({ message: 'Not authenticated' }), { status: 401 });
     }
 
-    const response = await fetch('http://localhost:5256/api/todo', {
+
+    const response = await fetch('http://localhost:5256/api/journalEntry', {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
 
+
     if (!response.ok) {
+      console.error('Response not OK:', response.statusText);
       return new Response(JSON.stringify({ message: response.statusText }), { status: response.status });
     }
 
@@ -29,18 +33,16 @@ export async function GET() {
 
 export async function POST(req) {
   try {
+
     const { accessToken } = await getAccessToken();
 
     if (!accessToken) {
-      return new Response(JSON.stringify({ message: 'Not authenticated' }, { status: 401 }));
+      return new Response(JSON.stringify({ message: 'Not authenticated' }), { status: 401 });
     }
 
     const body = await req.json();
 
-    if (body.Description == null)
-      body.Description = ""
-
-    const response = await fetch('http://localhost:5256/api/todo', {
+    const response = await fetch('http://localhost:5256/api/journalEntry', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -49,12 +51,14 @@ export async function POST(req) {
       body: JSON.stringify(body),
     });
 
+
     if (!response.ok) {
       console.error('Response not OK:', response.statusText);
       return new Response(JSON.stringify({ message: response.statusText }), { status: response.status });
     }
 
-    return new Response("Created todo", { status: 201 });
+    return new Response("Created journal entry", { status: 201 });
+
   } catch (error) {
     console.error('Error fetching access token or making request:', error);
     return new Response(JSON.stringify({ message: 'Internal Server Error' }), { status: 500 });

@@ -1,9 +1,12 @@
 import { Box, Button, Container, Grid, TextField, Typography } from "@mui/material";
 import { StaticDateTimePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const TodoForm = ({ todo }) => {
+  const router = useRouter();
+
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -24,7 +27,6 @@ const TodoForm = ({ todo }) => {
 
     const method = todo ? 'PUT' : 'POST';
     const url = todo ? `/api/todo/${todo.id}` : '/api/todo'
-    console.log(JSON.stringify({ name, description, startTime, deadLine, isCompleted }))
 
     try {
       const response = await fetch(url, {
@@ -39,6 +41,8 @@ const TodoForm = ({ todo }) => {
         console.error('Error:', response.statusText);
         return;
       }
+
+      router.push('/user/todos')
 
     } catch (error) {
       console.error('Error', error)

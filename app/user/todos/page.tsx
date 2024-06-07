@@ -49,12 +49,11 @@ const TodosPage = () => {
           Todos
         </Typography>
 
-        <Link href="/user/todos/new" style={{ textDecoration: 'none' }}>
+        <Link href="/user/todos/new" style={{ textDecoration: 'none', paddingTop: 30 }}>
 
           <Box
             id="image"
             sx={(theme) => ({
-              mt: { xs: 8, sm: 10 },
               alignSelf: 'center',
               height: { xs: 250 },
               width: '100%',

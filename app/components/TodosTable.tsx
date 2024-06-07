@@ -22,7 +22,6 @@ const TodosTable = () => {
         isCompleted: todo.isCompleted,
         todoId: todo.id,
       }))
-      data.data.map(todo => console.log(todo.name))
       setRows(mapedData)
     };
     fetchTodos();
@@ -77,12 +76,11 @@ const TodosTable = () => {
     if (confirm('Are you sure you want to delete this todo?')) {
       try {
         console.log("From handle", id)
-        const response = await fetch('/api/todo', {
+        const response = await fetch(`/api/todo/${id}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: id
         });
 
 
