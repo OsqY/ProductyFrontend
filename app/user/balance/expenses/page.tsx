@@ -1,44 +1,26 @@
 'use client'
 
-import JournalForm from "@/app/components/JournalForm";
+import ExpensesChart from "@/app/components/ExpensesChart";
+import ExpensesTable from "@/app/components/ExpensesTable";
 import { Box, Container, Typography, alpha } from "@mui/material";
-import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const UpdateJournalPage = () => {
-  const pathname = usePathname();
-  const router = useRouter();
-
-  let pathnameSplitted = pathname.split("/")
-  let id = Number.parseInt(pathnameSplitted[4])
-
-  const [journalEntry, setJournalEntry] = useState(null)
-
+const ExpensesPage = () => {
+  const [expenses, setExpenses] = useState([]);
   useEffect(() => {
-    const fetchJournalEntry = async () => {
-      if (!id) return
-
-      try {
-        const response = await fetch(`/api/journalEntry/${id}`)
-
-        if (!response.ok) {
-          console.error('Failed to fetch todo:', response.statusText)
-          router.push('/user/journalEntry')
-        }
-
-        const data = await response.json();
-        setJournalEntry(data);
-      } catch (error) {
-        console.error('Error fetching todo', error);
-      }
+    const fetchExpenses = async () => {
+      const response = await fetch('/api/expense');
+      const data = await response.json();
+      setExpenses(data);
     };
 
-    fetchJournalEntry();
-  }, [id, router])
+    fetchExpenses();
+  }, []);
 
   return (
+
     <Box
-      id="todos"
+      id="expenses"
       sx={(theme) => ({
         width: '100%',
         backgroundImage:
@@ -76,14 +58,13 @@ const UpdateJournalPage = () => {
             fontSize: 'clamp(3.5rem, 10vw, 4rem)',
           }}
         >
-          Update Journal Entry
+          User Expenses
         </Typography>
-        {journalEntry ? <JournalForm journal={journalEntry} /> : <p>Loading...</p>}
+        <ExpensesTable initialExpenses={expenses} />
+        <ExpensesChart />
       </Container>
     </Box>
-
-
   )
 }
 
-export default UpdateJournalPage;
+export default ExpensesPage;

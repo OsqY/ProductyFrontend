@@ -12,7 +12,6 @@ const JournalPage = () => {
       const response = await fetch('/api/journalEntry')
       const data = await response.json();
 
-      console.log(data)
       const mapedData = data.data.map(entry => ({
         name: entry.name,
         description: entry.description,
@@ -24,8 +23,6 @@ const JournalPage = () => {
     }
     fetchEntries();
   }, [])
-
-  console.log(entries)
 
   return (
     <Box

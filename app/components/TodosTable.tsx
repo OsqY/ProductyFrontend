@@ -75,7 +75,6 @@ const TodosTable = () => {
   const handleDeleteClick = async (id) => {
     if (confirm('Are you sure you want to delete this todo?')) {
       try {
-        console.log("From handle", id)
         const response = await fetch(`/api/todo/${id}`, {
           method: 'DELETE',
           headers: {

@@ -122,9 +122,23 @@ export const UserNavBar = ({ mode, toggleColorMode }: AppBarProps) => {
                 </Link>
               </MenuItem>
               <MenuItem sx={{ py: '6px', px: '12px' }}>
-                <Link href="/faq" passHref style={{ textDecoration: 'none' }}>
+                <Link href="/user/balance" passHref style={{ textDecoration: 'none' }}>
                   <Typography variant="body2" color="text.primary">
-                    FAQ
+                    Balance
+                  </Typography>
+                </Link>
+              </MenuItem>
+              <MenuItem sx={{ py: '6px', px: '12px' }}>
+                <Link href="/user/balance/incomes" passHref style={{ textDecoration: 'none' }}>
+                  <Typography variant="body2" color="text.primary">
+                    Incomes
+                  </Typography>
+                </Link>
+              </MenuItem>
+              <MenuItem sx={{ py: '6px', px: '12px' }}>
+                <Link href="/user/balance/expenses" passHref style={{ textDecoration: 'none' }}>
+                  <Typography variant="body2" color="text.primary">
+                    Expenses
                   </Typography>
                 </Link>
               </MenuItem>
@@ -232,6 +246,27 @@ export const UserNavBar = ({ mode, toggleColorMode }: AppBarProps) => {
                   <Link href="/user/whiteboard" passHref style={{ textDecoration: 'none' }}>
                     <Typography variant="body2" color="text.primary">
                       Whiteboard
+                    </Typography>
+                  </Link>
+                </MenuItem>
+                <MenuItem sx={{ py: '6px', px: '12px' }}>
+                  <Link href="/user/balance" passHref style={{ textDecoration: 'none' }}>
+                    <Typography variant="body2" color="text.primary">
+                      Balance
+                    </Typography>
+                  </Link>
+                </MenuItem>
+                <MenuItem sx={{ py: '6px', px: '12px' }}>
+                  <Link href="/user/balance/incomes" passHref style={{ textDecoration: 'none' }}>
+                    <Typography variant="body2" color="text.primary">
+                      Incomes
+                    </Typography>
+                  </Link>
+                </MenuItem>
+                <MenuItem sx={{ py: '6px', px: '12px' }}>
+                  <Link href="/user/balance/expenses" passHref style={{ textDecoration: 'none' }}>
+                    <Typography variant="body2" color="text.primary">
+                      Expenses
                     </Typography>
                   </Link>
                 </MenuItem>

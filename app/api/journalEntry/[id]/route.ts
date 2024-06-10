@@ -49,7 +49,6 @@ export async function PUT(req, { params }: { params: { id: string } }) {
     });
 
     const data = await response.json();
-    console.log(data)
     return new Response(JSON.stringify(data), { status: 200 });
 
   } catch (error) {

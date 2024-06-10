@@ -57,22 +57,20 @@ const JournalEntryCard = ({ journalEntry }) => {
         position: 'relative', // Añadido para posicionar los botones
       })}
     >
-      <Link href={`/user/journal/update/${journalEntry.id}`} style={{ textDecoration: 'none', paddingTop: 30 }}>
-        <Typography
-          component="h5"
-          variant="h6"
-          sx={{
-            display: 'column',
-            flexDirection: { xs: 'column', md: 'row' },
-            alignSelf: 'center',
-            textAlign: 'center',
-            fontSize: 'clamp(2.5rem, 3vw, 4rem)',
-            fontWeight: 'bold'
-          }}
-        >
-          {journalEntry.name}
-        </Typography>
-      </Link>
+      <Typography
+        component="h5"
+        variant="h6"
+        sx={{
+          display: 'column',
+          flexDirection: { xs: 'column', md: 'row' },
+          alignSelf: 'center',
+          textAlign: 'center',
+          fontSize: 'clamp(2.5rem, 3vw, 4rem)',
+          fontWeight: 'bold'
+        }}
+      >
+        {journalEntry.name}
+      </Typography>
       <Typography
         component="p"
         variant="body1"

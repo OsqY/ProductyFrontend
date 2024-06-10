@@ -1,44 +1,28 @@
+
 'use client'
 
-import JournalForm from "@/app/components/JournalForm";
+import IncomesChart from "@/app/components/IncomesChart";
+import IncomesTable from "@/app/components/IncomesTable";
 import { Box, Container, Typography, alpha } from "@mui/material";
-import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const UpdateJournalPage = () => {
-  const pathname = usePathname();
-  const router = useRouter();
-
-  let pathnameSplitted = pathname.split("/")
-  let id = Number.parseInt(pathnameSplitted[4])
-
-  const [journalEntry, setJournalEntry] = useState(null)
-
+const IncomesPage = () => {
+  const [incomes, setIncomes] = useState([]);
   useEffect(() => {
-    const fetchJournalEntry = async () => {
-      if (!id) return
-
-      try {
-        const response = await fetch(`/api/journalEntry/${id}`)
-
-        if (!response.ok) {
-          console.error('Failed to fetch todo:', response.statusText)
-          router.push('/user/journalEntry')
-        }
-
-        const data = await response.json();
-        setJournalEntry(data);
-      } catch (error) {
-        console.error('Error fetching todo', error);
-      }
+    const fetchIncomes = async () => {
+      const response = await fetch('/api/income');
+      const data = await response.json();
+      setIncomes(data.data);
     };
 
-    fetchJournalEntry();
-  }, [id, router])
+    fetchIncomes();
+  }, []);
+  console.log(incomes)
 
   return (
+
     <Box
-      id="todos"
+      id="incomes"
       sx={(theme) => ({
         width: '100%',
         backgroundImage:
@@ -76,14 +60,13 @@ const UpdateJournalPage = () => {
             fontSize: 'clamp(3.5rem, 10vw, 4rem)',
           }}
         >
-          Update Journal Entry
+          User Incomes
         </Typography>
-        {journalEntry ? <JournalForm journal={journalEntry} /> : <p>Loading...</p>}
+        <IncomesTable initialIncomes={incomes} />
+        <IncomesChart initialIncomes={incomes} />
       </Container>
     </Box>
-
-
   )
 }
 
-export default UpdateJournalPage;
+export default IncomesPage;

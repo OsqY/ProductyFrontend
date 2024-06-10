@@ -1,44 +1,12 @@
 'use client'
 
-import JournalForm from "@/app/components/JournalForm";
-import { Box, Container, Typography, alpha } from "@mui/material";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Box, Container, Typography, alpha } from "@mui/material"
 
-const UpdateJournalPage = () => {
-  const pathname = usePathname();
-  const router = useRouter();
-
-  let pathnameSplitted = pathname.split("/")
-  let id = Number.parseInt(pathnameSplitted[4])
-
-  const [journalEntry, setJournalEntry] = useState(null)
-
-  useEffect(() => {
-    const fetchJournalEntry = async () => {
-      if (!id) return
-
-      try {
-        const response = await fetch(`/api/journalEntry/${id}`)
-
-        if (!response.ok) {
-          console.error('Failed to fetch todo:', response.statusText)
-          router.push('/user/journalEntry')
-        }
-
-        const data = await response.json();
-        setJournalEntry(data);
-      } catch (error) {
-        console.error('Error fetching todo', error);
-      }
-    };
-
-    fetchJournalEntry();
-  }, [id, router])
+const UserBalancePage = () => {
 
   return (
     <Box
-      id="todos"
+      id="balance"
       sx={(theme) => ({
         width: '100%',
         backgroundImage:
@@ -76,14 +44,11 @@ const UpdateJournalPage = () => {
             fontSize: 'clamp(3.5rem, 10vw, 4rem)',
           }}
         >
-          Update Journal Entry
+          User Balance
         </Typography>
-        {journalEntry ? <JournalForm journal={journalEntry} /> : <p>Loading...</p>}
       </Container>
     </Box>
-
-
   )
 }
 
-export default UpdateJournalPage;
+export default UserBalancePage;
