@@ -17,7 +17,6 @@ const IncomesPage = () => {
 
     fetchIncomes();
   }, []);
-  console.log(incomes)
 
   return (
 

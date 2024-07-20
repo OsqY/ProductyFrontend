@@ -11,7 +11,7 @@ const ExpensesPage = () => {
     const fetchExpenses = async () => {
       const response = await fetch('/api/expense');
       const data = await response.json();
-      setExpenses(data);
+      setExpenses(data.data);
     };
 
     fetchExpenses();

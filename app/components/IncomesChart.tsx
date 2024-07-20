@@ -18,7 +18,6 @@ const IncomesChart = ({ initialIncomes }) => {
 
   }, [initialIncomes]);
 
-  console.log(incomes)
   return (
     <>
       <PieChart series={[{

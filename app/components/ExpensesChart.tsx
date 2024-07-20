@@ -9,7 +9,7 @@ const ExpensesChart = () => {
     const fetchExpenses = async () => {
       const response = await fetch('/api/expense');
       const data = await response.json();
-      const mappedExpenses = data.map((e, index) => ({
+      const mappedExpenses = data?.data?.map((e, index) => ({
         id: e.id,
         value: e.spentMoney,
         label: e.name,

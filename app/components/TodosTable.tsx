@@ -14,7 +14,7 @@ const TodosTable = () => {
       const data = await response.json();
 
       let i = 1;
-      const mapedData = data.data.map(todo => ({
+      const mapedData = data?.data?.map(todo => ({
         id: i++,
         todoName: todo.name,
         startTime: todo.startTime,
@@ -22,7 +22,7 @@ const TodosTable = () => {
         isCompleted: todo.isCompleted,
         todoId: todo.id,
       }))
-      setRows(mapedData)
+      setRows(mapedData ?? { id: 0 })
     };
     fetchTodos();
   }, [])

@@ -1,5 +1,6 @@
 'use client'
 
+import UserBalanceChart from "@/app/components/UserBalanceChart";
 import { Box, Container, Typography, alpha } from "@mui/material"
 
 const UserBalancePage = () => {
@@ -46,6 +47,8 @@ const UserBalancePage = () => {
         >
           User Balance
         </Typography>
+
+        <UserBalanceChart />
       </Container>
     </Box>
   )
