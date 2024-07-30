@@ -1,12 +1,13 @@
 'use client';
+import '../../../index.css'
 
 import { Box, Container, Typography, alpha } from "@mui/material";
+import { Tldraw } from "tldraw";
 
 const WhiteboardPage = () => {
-
   return (
     <Box
-      id="todos"
+      id="whiteboard"
       sx={(theme) => ({
         width: '100%',
         backgroundImage:
@@ -26,14 +27,6 @@ const WhiteboardPage = () => {
           pb: { xs: 8, sm: 12 },
         }}
       >
-        {/* <Typography variant="h4" component="h3" marginTop={0}> */}
-        {/*   {isLoading && ( */}
-        {/*     <div>Loading...</div> */}
-        {/*   ) || */}
-        {/*     !user && ( */}
-        {/*       <div>Redirecting...</div> */}
-        {/*     )} */}
-        {/* </Typography> */}
         <Typography
           variant="h1"
           sx={{
@@ -46,33 +39,32 @@ const WhiteboardPage = () => {
         >
           Whiteboard
         </Typography>
+
         <Box
-          id="image"
-          sx={(theme) => ({
+          sx={{
             mt: { xs: 8, sm: 10 },
-            alignSelf: 'center',
-            height: { xs: 200, sm: 700 },
             width: '100%',
-            backgroundImage:
-              theme.palette.mode === 'light'
-                ? 'url("/static/images/templates/templates-images/hero-light.png")'
-                : 'url("/static/images/templates/templates-images/hero-dark.png")',
-            backgroundSize: 'cover',
+            height: '100vh', // Ajusta la altura según sea necesario
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >      <Box
+          sx={{
+            width: '100%',
+            height: '100%',
             borderRadius: '10px',
-            outline: '1px solid',
-            outlineColor:
-              theme.palette.mode === 'light'
-                ? alpha('#BFCCD9', 0.5)
-                : alpha('#9CCCFC', 0.1),
-            boxShadow:
-              theme.palette.mode === 'light'
-                ? `0 0 12px 8px ${alpha('#9CCCFC', 0.2)}`
-                : `0 0 24px 12px ${alpha('#033363', 0.2)}`,
-          })}
-        />
+            boxShadow: '0 0 24px 12px rgba(3, 51, 99, 0.2)', // Ajusta el boxShadow si es necesario
+          }}
+        >
+            <Tldraw
+            />
+          </Box>
+        </Box>
       </Container>
-    </Box >
+    </Box>
   )
 }
 
 export default WhiteboardPage;
+

@@ -3,6 +3,7 @@ import { getAccessToken } from '@auth0/nextjs-auth0';
 export async function GET() {
   try {
     const { accessToken } = await getAccessToken();
+    console.log(accessToken)
 
     if (!accessToken) {
       return new Response(JSON.stringify({ message: 'Not authenticated' }), { status: 401 });

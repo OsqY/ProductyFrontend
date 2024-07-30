@@ -5,7 +5,7 @@ export async function GET() {
 
     const { accessToken } = await getAccessToken();
 
-    if (!accessToken) return JSON.stringify({ message: 'Not authenticated' }, { status: 401 })
+    if (!accessToken) return new Response(JSON.stringify({ message: 'Not authenticated' }, { status: 401 }))
 
     const response = await fetch('http://localhost:5256/api/expense', {
       headers: {
@@ -33,9 +33,9 @@ export async function POST(req) {
   try {
     const { accessToken } = await getAccessToken();
 
-    if (!accessToken) return JSON.stringify({ message: 'Not authenticated' }, { status: 401 })
+    if (!accessToken) return new Response(JSON.stringify({ message: 'Not authenticated' }, { status: 401 }))
 
-    const body = await req.json();
+    const body = await req
     // console.log(body)
 
     const response = await fetch('http://localhost:5256/api/expense', {

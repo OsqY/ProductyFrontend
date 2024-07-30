@@ -107,13 +107,13 @@ export const UserNavBar = ({ mode, toggleColorMode }: AppBarProps) => {
                   </Typography>
                 </Link>
               </MenuItem>
-              <MenuItem sx={{ py: '6px', px: '12px' }}>
-                <Link href='/user/study' style={{ textDecoration: 'none' }} passHref>
-                  <Typography variant="body2" color="text.primary">
-                    Study Sessions
-                  </Typography>
-                </Link>
-              </MenuItem>
+              {/* <MenuItem sx={{ py: '6px', px: '12px' }}> */}
+              {/*   <Link href='/user/study' style={{ textDecoration: 'none' }} passHref> */}
+              {/*     <Typography variant="body2" color="text.primary"> */}
+              {/*       Study Sessions */}
+              {/*     </Typography> */}
+              {/*   </Link> */}
+              {/* </MenuItem> */}
               <MenuItem sx={{ py: '6px', px: '12px' }}>
                 <Link href="/user/whiteboard" passHref style={{ textDecoration: 'none' }}>
                   <Typography variant="body2" color="text.primary">
@@ -235,13 +235,13 @@ export const UserNavBar = ({ mode, toggleColorMode }: AppBarProps) => {
                     </Typography>
                   </Link>
                 </MenuItem>
-                <MenuItem sx={{ py: '6px', px: '12px' }}>
-                  <Link href='/user/study' style={{ textDecoration: 'none' }} passHref>
-                    <Typography variant="body2" color="text.primary">
-                      Study Sessions
-                    </Typography>
-                  </Link>
-                </MenuItem>
+                {/* <MenuItem sx={{ py: '6px', px: '12px' }}> */}
+                {/*   <Link href='/user/study' style={{ textDecoration: 'none' }} passHref> */}
+                {/*     <Typography variant="body2" color="text.primary"> */}
+                {/*       Study Sessions */}
+                {/*     </Typography> */}
+                {/*   </Link> */}
+                {/* </MenuItem> */}
                 <MenuItem sx={{ py: '6px', px: '12px' }}>
                   <Link href="/user/whiteboard" passHref style={{ textDecoration: 'none' }}>
                     <Typography variant="body2" color="text.primary">
